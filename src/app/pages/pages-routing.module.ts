@@ -68,6 +68,11 @@ const routes: Routes = [{
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),
     },
+    { 
+      path: 'user', 
+      loadChildren: () => import('./user/user.module')
+        .then(m => m.UserModule),
+    },
     {
       path: '',
       redirectTo: 'dashboard',

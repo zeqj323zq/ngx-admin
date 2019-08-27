@@ -244,4 +244,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: 'User',
+    icon: 'people-outline',
+    children: [
+      {
+        title: 'User-list',
+        icon: 'person-outline',
+        link: '/pages/user/user-list',
+      },
+      {
+        title: 'User-add',
+        icon: 'person-outline',
+        link: '/pages/user/user-add',
+      },
+    ]
+  }
 ];
