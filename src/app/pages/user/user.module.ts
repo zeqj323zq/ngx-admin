@@ -12,16 +12,19 @@ import {
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
+import { RouterModule } from '@angular/router';
 
 import { UserComponent } from './user.component';
-import { UserListComponent } from './user-list';
+import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { routing } from './user.routing';
 
 @NgModule({
     imports: [
-        FormsModule, ReactiveFormsModule,
+        FormsModule, 
+        ReactiveFormsModule,
         ThemeModule,
+        RouterModule,
         NbAccordionModule,
         NbButtonModule, 
         NbCardModule,
@@ -39,4 +42,4 @@ import { routing } from './user.routing';
     ]
 })
 
-export class UserModule {} 
+export class UserModule {}

@@ -11,6 +11,10 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {HashLocationStrategy , LocationStrategy} from '@angular/common';
+import { AuthGuard } from './auth-guard.service';
+import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -20,6 +24,13 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+
+const formSetting: any = {
+  redirectDelay: 0,
+  showMessages: {
+    success: true,
+  },
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,8 +52,48 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+
+          baseEndpoint: 'http://example.com/app-api/v1',
+          login: {
+            endpoint: '/auth/login',
+            method: 'post',
+          },
+          register: {
+            endpoint: '/auth/register',
+            method: 'post',
+          },
+          logout: {
+            endpoint: '/auth/logout',
+            method: 'post',
+          },
+          requestPass: {
+            endpoint: '/auth/request-pass',
+            method: 'post',
+          },
+          resetPass: {
+            endpoint: '/auth/reset-pass',
+            method: 'post',
+          },
+        }),
+      ],
+      // forms: {
+      //   login: formSetting,
+      //   register: formSetting,
+      //   requestPassword: formSetting,
+      //   resetPassword: formSetting,
+      //   logout: {
+      //     redirectDelay: 0,
+      //   },
+      // },
+    })
   ],
   bootstrap: [AppComponent],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},AuthGuard]
 })
+
 export class AppModule {
 }

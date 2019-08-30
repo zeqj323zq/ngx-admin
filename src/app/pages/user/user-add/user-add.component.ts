@@ -3,7 +3,7 @@ import { fruits } from './index';
 
 @Component({
     selector: 'ngx-user-add',
-    templateUrl: 'user-add.component.html', // 组件对应的html路径
+    templateUrl: 'user-add.html', // Related HTML url
     styleUrls: ['user-add.component.scss']
 })
 

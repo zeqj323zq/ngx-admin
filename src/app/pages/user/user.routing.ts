@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UserComponent } from './user.component'; // 导入刚才新建的模块
 
-import { UserListComponent } from './user-list';
+import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 
 const routes: Routes = [
@@ -12,11 +12,11 @@ const routes: Routes = [
         component: UserComponent,
         children: [
             {
-                path: 'list',
+                path: 'user-list',
                 component: UserListComponent
             },
             { 
-                path: 'add',
+                path: 'user-add',
                 component: UserAddComponent
             }
         ]
