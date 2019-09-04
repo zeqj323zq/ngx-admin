@@ -12,7 +12,7 @@ import {
   } from '@nebular/auth';
 
 import { LoginComponent } from './login/login.component';
-import { AuthComponent } from './auth.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
     // .. 路由组件
@@ -26,8 +26,16 @@ export const routes: Routes = [
         },
         {
           path: 'register',
-          component: NbRegisterComponent,
+          component: RegisterComponent,
         },
+        // {
+        //   path: '',
+        //   component: NbOAuth2LoginComponent,
+        // },
+        // {
+        //   path: 'callback',
+        //   component: NbOAuth2CallbackComponent,
+        // },
         // {
         //   path: '**',
         //   redirectTo: 'auth',

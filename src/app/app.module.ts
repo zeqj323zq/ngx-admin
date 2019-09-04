@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HashLocationStrategy , LocationStrategy} from '@angular/common';
 import { AuthGuard } from './auth-guard.service';
-import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbOAuth2AuthStrategy, NbOAuth2ResponseType, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
 
 import {
   NbChatModule,
@@ -26,6 +26,7 @@ import {
 } from '@nebular/theme';
 
 const formSetting: any = {
+  strategy: 'email',
   redirectDelay: 0,
   showMessages: {
     success: true,
@@ -56,43 +57,79 @@ const formSetting: any = {
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
+          // clientId: 'YOUR_CLIENT_ID',
+          // clientSecret: '',
+          // authorize: {
+          //   endpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+          //   responseType: NbOAuth2ResponseType.TOKEN,
+          //   scope: 'https://www.googleapis.com/auth/userinfo.profile',
+          // },
 
-          baseEndpoint: 'http://example.com/app-api/v1',
+          // redirectUri: 'http://localhost:4100/example/oauth2/callback',
+          
+          baseEndpoint: 'http://192.168.212.223:9999/winstore/api', //http访问请求
           login: {
-            endpoint: '/auth/login',
+            endpoint: '/user/login',
             method: 'post',
+            redirect: {
+              success: '/dashboard/',
+              failure: null, // 停留在原页面
+            },
           },
           register: {
-            endpoint: '/auth/register',
+            endpoint: '/user',
             method: 'post',
+            redirect: {
+              success: '/auth/login',
+              failure: null, // 停留在原页面
+            },
           },
           logout: {
-            endpoint: '/auth/logout',
-            method: 'post',
+            endpoint: '/user/logout',
+            method: 'delete',
           },
           requestPass: {
-            endpoint: '/auth/request-pass',
+            endpoint: '/user/request-pass',
             method: 'post',
           },
           resetPass: {
-            endpoint: '/auth/reset-pass',
+            endpoint: '/user/reset-pass',
             method: 'post',
           },
+          token: {
+            class: NbAuthJWTToken,
+            key: 'token', // this parameter tells where to look for the token
+          }
         }),
       ],
-      // forms: {
-      //   login: formSetting,
-      //   register: formSetting,
-      //   requestPassword: formSetting,
-      //   resetPassword: formSetting,
-      //   logout: {
-      //     redirectDelay: 0,
-      //   },
-      // },
+          forms: {
+        login: formSetting,
+        register: formSetting,
+        requestPassword: formSetting,
+        resetPassword: formSetting,
+        logout: {
+          redirectDelay: 0,
+          },
+          validation: {
+            password: {
+              required: true,
+              minLength: 4,
+              maxLength: 50,
+            },
+            email: {
+              required: true,
+            },
+            fullName: {
+              required: false,
+              minLength: 4,
+              maxLength: 50,
+            },
+          }
+        }
     })
   ],
   bootstrap: [AppComponent],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},AuthGuard]
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
 })
 
 export class AppModule {

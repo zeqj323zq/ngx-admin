@@ -14,21 +14,21 @@ import {
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: 'auth', //路由访问./auth
     loadChildren: () => import('./auth/auth.module')
       .then(m => m.AuthModule),
   },
+  {
+    path: 'pages', //路由访问./pages
+    //canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () => import('./pages/pages.module')
+      .then(m => m.PagesModule),
+  },
   // {
   //   path: 'pages',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () => import('./pages/pages.module')
-  //     .then(m => m.PagesModule),
+  //   //canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+  //   loadChildren: './pages/pages.module#PagesModule'
   // },
-  {
-    path: 'pages',
-    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './pages/pages.module#PagesModule'
-  },
   // {
   //   path: 'auth',
   //   component: NbAuthComponent,

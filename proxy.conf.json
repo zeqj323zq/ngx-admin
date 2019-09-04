@@ -1,0 +1,10 @@
+{
+    "/api": {
+    
+    "target": "http://192.168.212.223:9999",
+    "secure": false,
+    "router": {
+        "/user/login": "http://192.168.212.223:9999"
+     }
+    }
+}
