@@ -13,6 +13,7 @@ import {
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { LogoutComponent } from './logout/logout.component';
 
 export const routes: Routes = [
     // .. 路由组件
@@ -27,6 +28,10 @@ export const routes: Routes = [
         {
           path: 'register',
           component: RegisterComponent,
+        },
+        {
+          path: 'logout',
+          component: LogoutComponent,
         },
         // {
         //   path: '',

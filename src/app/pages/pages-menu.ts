@@ -8,7 +8,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   //   home: true,
   // },
   {
-    title: 'IoT Dashboard',
+    title: '主页',
     icon: 'home-outline',
     link: '/pages/iot-dashboard',
   },
@@ -222,38 +222,38 @@ export const MENU_ITEMS: NbMenuItem[] = [
   //     },
   //   ],
   // },
-  // {
-  //   title: 'Auth',
-  //   icon: 'lock-outline',
-  //   children: [
-  //     {
-  //       title: 'Login',
-  //       link: '/auth/login',
-  //     },
-  //     {
-  //       title: 'Register',
-  //       link: '/auth/register',
-  //     },
-  //     {
-  //       title: 'Request Password',
-  //       link: '/auth/request-password',
-  //     },
-  //     {
-  //       title: 'Reset Password',
-  //       link: '/auth/reset-password',
-  //     },
-  //   ],
-  // },
   {
-    title: 'User',
+    title: 'Auth',
+    icon: 'lock-outline',
+    children: [
+      {
+        title: 'Login',
+        link: '/auth/login',
+      },
+      {
+        title: 'Register',
+        link: '/auth/register',
+      },
+      {
+        title: 'Request Password',
+        link: '/auth/request-password',
+      },
+      {
+        title: 'Reset Password',
+        link: '/auth/reset-password',
+      },
+    ],
+  },
+  {
+    title: '用户',
     icon: 'people-outline',
     children: [
       {
-        title: 'User-list',
+        title: '用户列表',
         link: '/pages/user/user-list',
       },
       {
-        title: 'User-add',
+        title: '添加用户',
         link: '/pages/user/user-add',
       },
     ]

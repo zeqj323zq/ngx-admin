@@ -1,0 +1,415 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["auth-auth-module"],{
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/auth/login/login.component.html":
+/*!***************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/auth/login/login.component.html ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 id=\"title\" class=\"title\">登录</h1>\r\n<p class=\"sub-title\">请登录你的邮箱账号</p>\r\n\r\n<nb-alert *ngIf=\"showMessages.error && errors?.length && !submitted\" outline=\"danger\" role=\"alert\">\r\n  <p class=\"alert-title\"><b>糟糕!</b></p>\r\n  <ul class=\"alert-message-list\">\r\n    <li *ngFor=\"let error of errors\" class=\"alert-message\">{{ error }}</li>\r\n  </ul>\r\n</nb-alert>\r\n\r\n<nb-alert *ngIf=\"showMessages.success && messages?.length && !submitted\" outline=\"success\" role=\"alert\">\r\n  <p class=\"alert-title\"><b>Hooray!</b></p>\r\n  <ul class=\"alert-message-list\">\r\n    <li *ngFor=\"let message of messages\" class=\"alert-message\">{{ message }}</li>\r\n  </ul>\r\n</nb-alert>\r\n<div ng-app=\"myApp\" ng-controller=\"SiteCtrl\">\r\n<form (ngSubmit) =\"login()\" #form=\"ngForm\" aria-labelledby=\"title\" >\r\n    {{diagnostic}}\r\n\r\n  <!-- <div class=\"form-control-group\">\r\n    <label class=\"label\" for=\"input-email\">邮箱账号:</label>\r\n    <input nbInput\r\n           fullWidth\r\n           [(ngModel)]=\"user.email\"\r\n           #email=\"ngModel\"\r\n           name=\"email\"\r\n           id=\"input-email\"\r\n           pattern=\".+@.+\\..+\"\r\n           placeholder=\"邮箱账号\"\r\n           autofocus\r\n           [status]=\"email.dirty ? (email.invalid  ? 'danger' : 'success') : ''\"\r\n           [required]=\"getConfigValue('forms.validation.email.required')\"\r\n           [attr.aria-invalid]=\"email.invalid && email.touched ? true : null\">\r\n    <ng-container *ngIf=\"email.invalid && email.touched\">\r\n      <p class=\"error-message\" *ngIf=\"email.errors?.required\">\r\n        邮箱账号不能为空!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"email.errors?.pattern\">\r\n        邮箱账号不存在!\r\n      </p>\r\n    </ng-container>\r\n  </div> -->\r\n  <div class=\"form-control-group\">\r\n    <label class=\"label\" for=\"name\">昵称:</label>\r\n    <input nbInput\r\n           [(ngModel)]=\"user.name\"\r\n           #name=\"ngModel\"\r\n           id=\"name\"\r\n           name=\"name\"\r\n           placeholder=\"昵称\"\r\n           autofocus\r\n           fullWidth\r\n           [required]=\"getConfigValue('forms.validation.name.required')\"\r\n           [minlength]=\"getConfigValue('forms.validation.name.minLength')\"\r\n           [maxlength]=\"getConfigValue('forms.validation.name.maxLength')\"\r\n           [attr.aria-invalid]=\"name.invalid && name.touched ? true : null\">\r\n    <ng-container *ngIf=\"name.invalid && name.touched\">\r\n      <p class=\"error-message\" *ngIf=\"name.errors?.required\">\r\n        昵称不能为空!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"name.errors?.minlength || name.errors?.maxlength\">\r\n        昵称必须至少包括\r\n        from {{getConfigValue('forms.validation.name.minLength')}}\r\n        to {{getConfigValue('forms.validation.name.maxLength')}}\r\n        字符\r\n      </p>\r\n    </ng-container>\r\n  </div>\r\n\r\n  <div class=\"form-control-group\">\r\n    <label class=\"label\" for=\"password\">密码:</label>\r\n    <input nbInput\r\n           fullWidth\r\n           [(ngModel)]=\"user.password\"\r\n           #password=\"ngModel\"\r\n           name=\"password\"\r\n           type=\"password\"\r\n           id=\"password\"\r\n           placeholder=\"登录密码\"\r\n           [required]=\"getConfigValue('forms.validation.password.required')\"\r\n           [minlength]=\"getConfigValue('forms.validation.password.minLength')\"\r\n           [maxlength]=\"getConfigValue('forms.validation.password.maxLength')\"\r\n           [attr.aria-invalid]=\"password.invalid && password.touched ? true : null\">\r\n    <ng-container *ngIf=\"password.invalid && password.touched \">\r\n      <p class=\"error-message\" *ngIf=\"password.errors?.required\">\r\n        密码不能为空!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"password.errors?.minlength || password.errors?.maxlength\">\r\n        密码必须包含\r\n        从 {{ getConfigValue('forms.validation.password.minLength') }}\r\n        到 {{ getConfigValue('forms.validation.password.maxLength') }}\r\n        的字符\r\n      </p>\r\n    </ng-container>\r\n  </div>\r\n\r\n  <div class=\"form-control-group accept-group\">\r\n    <nb-checkbox name=\"rememberMe\"  *ngIf=\"rememberMe\">记住账号和密码</nb-checkbox>\r\n    <!-- [(ngModel)]=\"user.rememberMe\" -->\r\n    <a class=\"forgot-password\" routerLink=\"../request-password\">忘记密码?</a>\r\n  </div>\r\n\r\n  <button nbButton\r\n          type=\"submit\"\r\n          fullWidth\r\n          status=\"success\"\r\n          [disabled]=\"submitted || !form.valid\"\r\n          [class.btn-pulse]=\"submitted\"\r\n          (click)=\"SignIn\"\r\n         >\r\n    登录\r\n  </button>\r\n</form>\r\n</div>\r\n\r\n<section *ngIf=\"socialLinks && socialLinks.length > 0\" class=\"links\" aria-label=\"Social sign in\">\r\n  or enter with:\r\n  <div class=\"socials\">\r\n    <ng-container *ngFor=\"let socialLink of socialLinks\">\r\n      <a *ngIf=\"socialLink.link\"\r\n         [routerLink]=\"socialLink.link\"\r\n         [attr.target]=\"socialLink.target\"\r\n         [attr.class]=\"socialLink.icon\"\r\n         [class.with-icon]=\"socialLink.icon\">{{ socialLink.title }}</a>\r\n      <a *ngIf=\"socialLink.url\"\r\n         [attr.href]=\"socialLink.url\"\r\n         [attr.target]=\"socialLink.target\"\r\n         [attr.class]=\"socialLink.icon\"\r\n         [class.with-icon]=\"socialLink.icon\">{{ socialLink.title }}</a>\r\n    </ng-container>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"another-action\" aria-label=\"Register\">\r\n  还没有账号? <a class=\"text-link\" routerLink=\"../register\">注册</a>\r\n</section>\r\n\r\n<script>\r\n  \r\n  </script>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/auth/logout/logout.component.html":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/auth/logout/logout.component.html ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div>Logging out, please wait...</div>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/auth/register/register.component.html":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/auth/register/register.component.html ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 id=\"title\" class=\"title\">Register</h1>\r\n\r\n<nb-alert *ngIf=\"showMessages.error && errors?.length && !submitted\" outline=\"danger\" role=\"alert\">\r\n  <p class=\"alert-title\"><b>Oh snap!</b></p>\r\n  <ul class=\"alert-message-list\">\r\n    <li *ngFor=\"let error of errors\" class=\"alert-message\">{{ error }}</li>\r\n  </ul>\r\n</nb-alert>\r\n\r\n<nb-alert *ngIf=\"showMessages.success && messages?.length && !submitted\" outline=\"success\" role=\"alert\">\r\n  <p class=\"alert-title\"><b>Hooray!</b></p>\r\n  <ul class=\"alert-message-list\">\r\n    <li *ngFor=\"let message of messages\" class=\"alert-message\">{{ message }}</li>\r\n  </ul>\r\n</nb-alert>\r\n\r\n<form (ngSubmit)=\"register()\" #form=\"ngForm\" aria-labelledby=\"title\">\r\n{{form.value|json}}\r\n  <div class=\"form-control-group\">\r\n    <label class=\"label\" for=\"input-name\">Full name:</label>\r\n    <input nbInput\r\n           [(ngModel)]=\"user.name\"\r\n           #name=\"ngModel\"\r\n           id=\"input-name\"\r\n           name=\"name\"\r\n           placeholder=\"Full name\"\r\n           autofocus\r\n           fullWidth\r\n           [status]=\"name.dirty ? (name.invalid  ? 'danger' : 'success') : ''\"\r\n           [required]=\"getConfigValue('forms.validation.name.required')\"\r\n           [minlength]=\"getConfigValue('forms.validation.name.minLength')\"\r\n           [maxlength]=\"getConfigValue('forms.validation.name.maxLength')\"\r\n           [attr.aria-invalid]=\"name.invalid && name.touched ? true : null\">\r\n    <ng-container *ngIf=\"name.invalid && name.touched\">\r\n      <p class=\"error-message\" *ngIf=\"name.errors?.required\">\r\n        Full name is required!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"name.errors?.minlength || name.errors?.maxlength\">\r\n        Full name should contains\r\n        from {{getConfigValue('forms.validation.name.minLength')}}\r\n        to {{getConfigValue('forms.validation.name.maxLength')}}\r\n        characters\r\n      </p>\r\n    </ng-container>\r\n  </div>\r\n  \r\n  <!-- <div class=\"form-control-group\">\r\n    <label class=\"label\" for=\"input-email\">Email address:</label>\r\n    <input nbInput\r\n           [(ngModel)]=\"user.email\"\r\n           #email=\"ngModel\"\r\n           id=\"input-email\"\r\n           name=\"email\"\r\n           pattern=\".+@.+..+\"\r\n           placeholder=\"Email address\"\r\n           fullWidth\r\n           [status]=\"email.dirty ? (email.invalid  ? 'danger' : 'success') : ''\"\r\n           [required]=\"getConfigValue('forms.validation.email.required')\"\r\n           [attr.aria-invalid]=\"email.invalid && email.touched ? true : null\">\r\n    <ng-container *ngIf=\"email.invalid && email.touched\">\r\n      <p class=\"error-message\" *ngIf=\"email.errors?.required\">\r\n        Email is required!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"email.errors?.pattern\">\r\n        Email should be the real one!\r\n      </p>\r\n    </ng-container>\r\n  </div> -->\r\n\r\n  <div class=\"form-control-group\">\r\n    <label class=\"label\" for=\"input-password\">Password:</label>\r\n    <input nbInput\r\n           [(ngModel)]=\"user.password\"\r\n           #password=\"ngModel\"\r\n           type=\"password\"\r\n           id=\"input-password\"\r\n           name=\"password\"\r\n           placeholder=\"Password\"\r\n           fullWidth\r\n           [status]=\"password.dirty ? (password.invalid  ? 'danger' : 'success') : ''\"\r\n           [required]=\"getConfigValue('forms.validation.password.required')\"\r\n           [minlength]=\"getConfigValue('forms.validation.password.minLength')\"\r\n           [maxlength]=\"getConfigValue('forms.validation.password.maxLength')\"\r\n           [attr.aria-invalid]=\"password.invalid && password.touched ? true : null\">\r\n    <ng-container *ngIf=\"password.invalid && password.touched\">\r\n      <p class=\"error-message\" *ngIf=\"password.errors?.required\">\r\n        Password is required!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"password.errors?.minlength || password.errors?.maxlength\">\r\n        Password should contains\r\n        from {{ getConfigValue('forms.validation.password.minLength') }}\r\n        to {{ getConfigValue('forms.validation.password.maxLength') }}\r\n        characters\r\n      </p>\r\n    </ng-container>\r\n  </div>\r\n  \r\n  <div class=\"form\">\r\n    <label class=\"label\" for=\"input-re-password\">Repeat password:</label>\r\n    <input nbInput\r\n          [(ngModel)]=\"user.confirmPassword\"\r\n           #rePass=\"ngModel\"\r\n           type=\"password\"\r\n           id=\"input-re-password\"\r\n           name=\"rePass\"\r\n           placeholder=\"Confirm Password\"\r\n           fullWidth\r\n           [status]=\"password.dirty ? (password.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''\"\r\n           [required]=\"getConfigValue('forms.validation.password.required')\"\r\n           [attr.aria-invalid]=\"rePass.invalid && rePass.touched ? true : null\">\r\n    <ng-container *ngIf=\"rePass.invalid && rePass.touched\">\r\n      <p class=\"error-message\" *ngIf=\"rePass.errors?.required\">\r\n        Password confirmation is required!\r\n      </p>\r\n      <p class=\"error-message\" *ngIf=\"password.value != rePass.value && !rePass.errors?.required\">\r\n        Password does not match the confirm password.\r\n      </p>\r\n    </ng-container>\r\n  </div>\r\n\r\n  <div class=\"form-control-group accept-group\" *ngIf=\"getConfigValue('forms.register.terms')\">\r\n    <nb-checkbox name=\"terms\" [(ngModel)]=\"user.terms\" #terms=\"ngModel\" [required]=\"getConfigValue('forms.register.terms')\">\r\n      Agree to <a href=\"#\" target=\"_blank\"><strong>Terms & Conditions</strong></a>\r\n    </nb-checkbox>\r\n  </div>\r\n\r\n  <button nbButton\r\n          fullWidth\r\n          status=\"success\"\r\n          [disabled]=\"submitted || !form.valid\"\r\n          [class.btn-pulse]=\"submitted\">\r\n    Register\r\n  </button>\r\n</form>\r\n\r\n<section *ngIf=\"socialLinks && socialLinks.length > 0\" class=\"links\" aria-label=\"Social sign in\">\r\n  or enter with:\r\n  <div class=\"socials\">\r\n    <ng-container *ngFor=\"let socialLink of socialLinks\">\r\n      <a *ngIf=\"socialLink.link\"\r\n         [routerLink]=\"socialLink.link\"\r\n         [attr.target]=\"socialLink.target\"\r\n         [attr.class]=\"socialLink.icon\"\r\n         [class.with-icon]=\"socialLink.icon\">{{ socialLink.title }}</a>\r\n      <a *ngIf=\"socialLink.url\"\r\n         [attr.href]=\"socialLink.url\"\r\n         [attr.target]=\"socialLink.target\"\r\n         [attr.class]=\"socialLink.icon\"\r\n         [class.with-icon]=\"socialLink.icon\">{{ socialLink.title }}</a>\r\n    </ng-container>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"another-action\" aria-label=\"Sign in\">\r\n  Already have an account? <a class=\"text-link\" routerLink=\"../login\">Log in</a>\r\n</section>"
+
+/***/ }),
+
+/***/ "./src/app/auth/auth-routing.module.ts":
+/*!*********************************************!*\
+  !*** ./src/app/auth/auth-routing.module.ts ***!
+  \*********************************************/
+/*! exports provided: routes, AuthRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthRoutingModule", function() { return AuthRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _nebular_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @nebular/auth */ "./node_modules/@nebular/auth/fesm2015/index.js");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./login/login.component */ "./src/app/auth/login/login.component.ts");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./register/register.component */ "./src/app/auth/register/register.component.ts");
+/* harmony import */ var _logout_logout_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./logout/logout.component */ "./src/app/auth/logout/logout.component.ts");
+
+
+
+
+
+
+
+
+const routes = [
+    // .. 路由组件
+    {
+        path: '',
+        component: _nebular_auth__WEBPACK_IMPORTED_MODULE_4__["NbAuthComponent"],
+        children: [
+            {
+                path: 'login',
+                component: _login_login_component__WEBPACK_IMPORTED_MODULE_5__["LoginComponent"],
+            },
+            {
+                path: 'register',
+                component: _register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"],
+            },
+            {
+                path: 'logout',
+                component: _logout_logout_component__WEBPACK_IMPORTED_MODULE_7__["LogoutComponent"],
+            },
+        ]
+    }
+];
+let AuthRoutingModule = class AuthRoutingModule {
+};
+AuthRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+    })
+], AuthRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/auth.module.ts":
+/*!*************************************!*\
+  !*** ./src/app/auth/auth.module.ts ***!
+  \*************************************/
+/*! exports provided: AuthModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthModule", function() { return AuthModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _auth_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth-routing.module */ "./src/app/auth/auth-routing.module.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login/login.component */ "./src/app/auth/login/login.component.ts");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./register/register.component */ "./src/app/auth/register/register.component.ts");
+/* harmony import */ var _logout_logout_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./logout/logout.component */ "./src/app/auth/logout/logout.component.ts");
+/* harmony import */ var _nebular_auth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @nebular/auth */ "./node_modules/@nebular/auth/fesm2015/index.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+
+
+
+
+
+
+
+
+
+
+
+let AuthModule = class AuthModule {
+};
+AuthModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbAlertModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbInputModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbButtonModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbCheckboxModule"],
+            _auth_routing_module__WEBPACK_IMPORTED_MODULE_5__["AuthRoutingModule"],
+            _nebular_auth__WEBPACK_IMPORTED_MODULE_9__["NbAuthModule"],
+        ],
+        declarations: [
+            _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"],
+            _register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"],
+            _logout_logout_component__WEBPACK_IMPORTED_MODULE_8__["LogoutComponent"]
+            // ... here goes our new components
+        ],
+    })
+], AuthModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/login/login.component.ts":
+/*!***********************************************!*\
+  !*** ./src/app/auth/login/login.component.ts ***!
+  \***********************************************/
+/*! exports provided: LoginComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _nebular_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @nebular/auth */ "./node_modules/@nebular/auth/fesm2015/index.js");
+
+
+
+
+
+
+
+let LoginComponent = class LoginComponent {
+    constructor(service, options = {}, cd, router, httpClient) {
+        this.service = service;
+        this.options = options;
+        this.cd = cd;
+        this.router = router;
+        this.httpClient = httpClient;
+        this.redirectDelay = 0;
+        this.showMessages = {};
+        this.strategy = '';
+        this.errors = [];
+        this.messages = [];
+        this.user = {};
+        this.submitted = false;
+        this.socialLinks = [];
+        this.rememberMe = false;
+        this.model = this.user;
+        this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
+        this.showMessages = this.getConfigValue('forms.login.showMessages');
+        this.strategy = this.getConfigValue('forms.login.strategy');
+        this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+        this.rememberMe = this.getConfigValue('forms.login.rememberMe');
+    }
+    login() {
+        // const httpOptions = { headers: new HttpHeaders({ 'content-type': 'application/json;charset=UTF-8'}), withCredentials: true };
+        //     this.httpClient.post('http://192.168.212.223:9999/winstore/api/user/login',this.user, httpOptions )
+        //         .subscribe(
+        //             response => {
+        //               console.log(response);
+        //             },error => {
+        //               this.errors = error;
+        //               console.log(error);
+        //             }
+        //         );
+        this.errors = [];
+        this.messages = [];
+        this.submitted = true;
+        this.service.authenticate(this.strategy, this.user).subscribe((result) => {
+            this.submitted = false;
+            if (result.isSuccess()) {
+                this.messages = result.getMessages();
+            }
+            else {
+                this.errors = result.getErrors();
+            }
+            const redirect = result.getRedirect();
+            if (redirect) {
+                setTimeout(() => {
+                    return this.router.navigateByUrl(redirect);
+                }, this.redirectDelay);
+            }
+            this.cd.detectChanges();
+        });
+    }
+    get diagnostic() { return JSON.stringify(this.model); }
+    getConfigValue(key) {
+        return Object(_nebular_auth__WEBPACK_IMPORTED_MODULE_4__["getDeepFromObject"])(this.options, key, null);
+    }
+};
+LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'ngx-login',
+        template: __webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/index.js!./src/app/auth/login/login.component.html"),
+        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].OnPush,
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_nebular_auth__WEBPACK_IMPORTED_MODULE_4__["NB_AUTH_OPTIONS"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_nebular_auth__WEBPACK_IMPORTED_MODULE_4__["NbAuthService"], Object, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+], LoginComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/logout/logout.component.ts":
+/*!*************************************************!*\
+  !*** ./src/app/auth/logout/logout.component.ts ***!
+  \*************************************************/
+/*! exports provided: LogoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogoutComponent", function() { return LogoutComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @nebular/auth */ "./node_modules/@nebular/auth/fesm2015/index.js");
+
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+
+
+
+
+let LogoutComponent = class LogoutComponent {
+    constructor(service, options = {}, router) {
+        this.service = service;
+        this.options = options;
+        this.router = router;
+        this.redirectDelay = 0;
+        this.strategy = '';
+        this.redirectDelay = this.getConfigValue('forms.logout.redirectDelay');
+        this.strategy = this.getConfigValue('forms.logout.strategy');
+    }
+    ngOnInit() {
+        this.logout(this.strategy);
+    }
+    logout(strategy) {
+        this.service.logout(strategy).subscribe((result) => {
+            const redirect = result.getRedirect();
+            if (redirect) {
+                setTimeout(() => {
+                    return this.router.navigateByUrl(redirect);
+                }, this.redirectDelay);
+            }
+        });
+    }
+    getConfigValue(key) {
+        return Object(_nebular_auth__WEBPACK_IMPORTED_MODULE_3__["getDeepFromObject"])(this.options, key, null);
+    }
+};
+LogoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'nb-logout',
+        template: __webpack_require__(/*! raw-loader!./logout.component.html */ "./node_modules/raw-loader/index.js!./src/app/auth/logout/logout.component.html"),
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_nebular_auth__WEBPACK_IMPORTED_MODULE_3__["NB_AUTH_OPTIONS"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_nebular_auth__WEBPACK_IMPORTED_MODULE_3__["NbAuthService"], Object, _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+], LogoutComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/register/register.component.scss":
+/*!*******************************************************!*\
+  !*** ./src/app/auth/register/register.component.scss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n * @license\r\n * Copyright Akveo. All Rights Reserved.\r\n * Licensed under the MIT License. See License.txt in the project root for license information.\r\n */\n:host .title {\n  margin-bottom: 2rem; }\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXV0aC9yZWdpc3Rlci9EOlxcYW5ndWxhcmpzXFxuZ3gtYWRtaW4vc3JjXFxhcHBcXGF1dGhcXHJlZ2lzdGVyXFxyZWdpc3Rlci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvYXV0aC9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7OztFQ0lFO0FEQ0Q7RUFFSyxtQkFBbUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2F1dGgvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcclxuICogQGxpY2Vuc2VcclxuICogQ29weXJpZ2h0IEFrdmVvLiBBbGwgUmlnaHRzIFJlc2VydmVkLlxyXG4gKiBMaWNlbnNlZCB1bmRlciB0aGUgTUlUIExpY2Vuc2UuIFNlZSBMaWNlbnNlLnR4dCBpbiB0aGUgcHJvamVjdCByb290IGZvciBsaWNlbnNlIGluZm9ybWF0aW9uLlxyXG4gKi9cclxuIDpob3N0IHtcclxuICAgIC50aXRsZSB7XHJcbiAgICAgIG1hcmdpbi1ib3R0b206IDJyZW07XHJcbiAgICB9XHJcbiAgfSIsIi8qKlxyXG4gKiBAbGljZW5zZVxyXG4gKiBDb3B5cmlnaHQgQWt2ZW8uIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXHJcbiAqIExpY2Vuc2VkIHVuZGVyIHRoZSBNSVQgTGljZW5zZS4gU2VlIExpY2Vuc2UudHh0IGluIHRoZSBwcm9qZWN0IHJvb3QgZm9yIGxpY2Vuc2UgaW5mb3JtYXRpb24uXHJcbiAqL1xuOmhvc3QgLnRpdGxlIHtcbiAgbWFyZ2luLWJvdHRvbTogMnJlbTsgfVxuIl19 */"
+
+/***/ }),
+
+/***/ "./src/app/auth/register/register.component.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/auth/register/register.component.ts ***!
+  \*****************************************************/
+/*! exports provided: RegisterComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @nebular/auth */ "./node_modules/@nebular/auth/fesm2015/index.js");
+
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+
+
+
+
+let RegisterComponent = class RegisterComponent {
+    constructor(service, options = {}, cd, router) {
+        this.service = service;
+        this.options = options;
+        this.cd = cd;
+        this.router = router;
+        this.redirectDelay = 0;
+        this.showMessages = {};
+        this.strategy = '';
+        this.submitted = false;
+        this.errors = [];
+        this.messages = [];
+        this.user = {};
+        this.socialLinks = [];
+        this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
+        this.showMessages = this.getConfigValue('forms.register.showMessages');
+        this.strategy = this.getConfigValue('forms.register.strategy');
+        this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+    }
+    register() {
+        this.errors = this.messages = [];
+        this.submitted = true;
+        this.service.register(this.strategy, this.user).subscribe((result) => {
+            this.submitted = false;
+            if (result.isSuccess()) {
+                this.messages = result.getMessages();
+            }
+            else {
+                this.errors = result.getErrors();
+            }
+            const redirect = result.getRedirect();
+            if (redirect) {
+                setTimeout(() => {
+                    return this.router.navigateByUrl(redirect);
+                }, this.redirectDelay);
+            }
+            this.cd.detectChanges();
+        });
+    }
+    getConfigValue(key) {
+        return Object(_nebular_auth__WEBPACK_IMPORTED_MODULE_3__["getDeepFromObject"])(this.options, key, null);
+    }
+};
+RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'nb-register',
+        template: __webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/index.js!./src/app/auth/register/register.component.html"),
+        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].OnPush,
+        styles: [__webpack_require__(/*! ./register.component.scss */ "./src/app/auth/register/register.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_nebular_auth__WEBPACK_IMPORTED_MODULE_3__["NB_AUTH_OPTIONS"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_nebular_auth__WEBPACK_IMPORTED_MODULE_3__["NbAuthService"], Object, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+], RegisterComponent);
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=auth-auth-module.js.map

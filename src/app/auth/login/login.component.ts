@@ -1,12 +1,13 @@
 import { NbLoginComponent } from '@nebular/auth';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '@nebular/auth';
 import { getDeepFromObject } from '@nebular/auth';
 import { NbAuthService } from '@nebular/auth';
 import { NbAuthResult } from '@nebular/auth';
+import { Serializer } from '@angular/compiler';
 
 @Component({
   moduleId: module.id,
@@ -42,6 +43,16 @@ export class LoginComponent {
   }
 
   login(): void {
+    // const httpOptions = { headers: new HttpHeaders({ 'content-type': 'application/json;charset=UTF-8'}), withCredentials: true };
+    //     this.httpClient.post('http://192.168.212.223:9999/winstore/api/user/login',this.user, httpOptions )
+    //         .subscribe(
+    //             response => {
+    //               console.log(response);
+    //             },error => {
+    //               this.errors = error;
+    //               console.log(error);
+    //             }
+    //         );
     this.errors = [];
     this.messages = [];
     this.submitted = true;

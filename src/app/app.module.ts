@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HttpHeaders } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -72,7 +72,7 @@ const formSetting: any = {
             endpoint: '/user/login',
             method: 'post',
             redirect: {
-              success: '/dashboard/',
+              success: '/pages/dashboard',
               failure: null, // 停留在原页面
             },
           },
@@ -85,8 +85,12 @@ const formSetting: any = {
             },
           },
           logout: {
-            endpoint: '/user/logout',
+            endpoint: '/user',
             method: 'delete',
+            redirect: {
+              success: '/auth/login',
+              failure: null, // 停留在原页面
+            },
           },
           requestPass: {
             endpoint: '/user/request-pass',
@@ -119,7 +123,7 @@ const formSetting: any = {
             email: {
               required: true,
             },
-            fullName: {
+            name: {
               required: false,
               minLength: 4,
               maxLength: 50,
